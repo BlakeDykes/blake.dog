@@ -1,0 +1,6 @@
+# Ignore artifacts:
+build
+coverage
+src/wasm/**/*.cpp
+src/wasm/**/*.js
+src/wasm/**/*.wasm
