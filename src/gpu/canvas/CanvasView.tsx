@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { resizeCanvasToDisplaySize } from "../gpu/utils";
 import { initWebGPU } from "../gpu/initWebGPU";
 import { loadParticlesModule } from "../wasm/particles/loadParticles";
-import { Renderer } from "../renderer/Renderer";
+import { Renderer } from "../gpu/renderer/Renderer";
 
-const PARTICLE_COUNT = 50_000;
+const PARTICLE_COUNT = 500;
 
 export const CanvasView = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
