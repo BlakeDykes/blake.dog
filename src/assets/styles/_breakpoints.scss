@@ -1,0 +1,17 @@
+$BP_xsmall: 375px;
+$BP_small: 576px;
+$BP_xsmedium: 768px;
+$BP_smedium: 1024px;
+$BP_medium: 1200px;
+$BP_large: 1600px;
+$BP_xlarge: 1800px;
+
+$breakpoints-down: (
+  "xsmall": $BP_xsmall,
+  "small": $BP_small,
+  "xsmedium": $BP_xsmedium,
+  "smedium": $BP_smedium,
+  "medium": $BP_medium,
+  "large": $BP_large,
+  "xlarge": $BP_xlarge,
+);

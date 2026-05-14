@@ -34,7 +34,7 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "${stylesPath}" as common;\n`,
+        additionalData: `@use "${stylesPath}" as *;\n`,
         importers: [new NodePackageImporter(), stylesImporter],
       },
     },

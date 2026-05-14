@@ -1,13 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "../ui/header";
-import { Text } from "../ui/text";
+import { Header } from "@/ui/shared/header";
 
 const About = () => {
   return (
     <div>
-      <Header Component="h1">About Me</Header>
-      <Header Component="h3">H3</Header>
-      <Text text="hi" />
+      <Header Component="h1">About</Header>
     </div>
   );
 };

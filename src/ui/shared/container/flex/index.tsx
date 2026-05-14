@@ -4,7 +4,7 @@ import type {
   ElementType,
   ReactNode,
 } from "react";
-import { cx } from "../../utils";
+import { cx } from "../../../utils";
 import styles from "./index.module.scss";
 
 type FlexOwnProps<T extends ElementType = "div"> = {

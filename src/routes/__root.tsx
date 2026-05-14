@@ -1,14 +1,15 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { Navigation } from "../ui/navigation";
+import { GlobalProvider } from "../providers/GlobalProvider";
+import { PageScaffold } from "@/ui/components/pageScaffold";
 
 const RootLayout = () => {
   return (
-    <>
-      <Navigation />
+    <GlobalProvider>
+      <PageScaffold />
       <Outlet />
       <TanStackRouterDevtools initialIsOpen={false} />
-    </>
+    </GlobalProvider>
   );
 };
 
