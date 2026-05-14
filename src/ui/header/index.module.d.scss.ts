@@ -1,5 +1,3 @@
 import globalClassNames from "../../@types/style.d";
-declare const classNames: typeof globalClassNames & {
-  readonly hContainer: "hContainer";
-};
+declare const classNames: typeof globalClassNames & {};
 export default classNames;

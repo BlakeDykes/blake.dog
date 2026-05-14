@@ -12,5 +12,12 @@
     @include common.breakpoint-down(small) {
       flex-direction: column;
     }
+
+    li {
+      &::marker {
+        display: none;
+        content: "";
+      }
+    }
   }
 }
