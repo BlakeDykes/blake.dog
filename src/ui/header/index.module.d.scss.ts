@@ -1,5 +1,5 @@
-declare const classNames: {
-  readonly headerh1: "headerh1";
-  readonly headerh2: "headerh2";
+import globalClassNames from "../../@types/style.d";
+declare const classNames: typeof globalClassNames & {
+  readonly hContainer: "hContainer";
 };
 export default classNames;

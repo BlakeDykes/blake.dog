@@ -9,6 +9,8 @@ export const Header = ({
   Component: HeadingTag;
 } & React.HTMLAttributes<HTMLHeadingElement>) => {
   return (
-    <Component className={props.className ?? "" + styles.header} {...props} />
+    <div className={styles.hContainer}>
+      <Component {...props} />
+    </div>
   );
 };

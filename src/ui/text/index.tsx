@@ -1,3 +1,4 @@
+import { cx } from "../utils";
 import styles from "./index.module.scss";
 
 export const Text = ({
@@ -7,5 +8,5 @@ export const Text = ({
   className?: string;
   text: string;
 }) => {
-  return <p className={className ?? "" + styles.text}>{text}</p>;
+  return <p className={cx(className, styles.text)}>{text}</p>;
 };

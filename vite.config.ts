@@ -11,9 +11,15 @@ const stylesImporter: FileImporter<"async"> = {
     if (url !== "@/styles") {
       return null;
     }
-    return pathToFileURL(path.resolve(__dirname, "./src/assets/styles"));
+    return pathToFileURL(
+      path.resolve(__dirname, "./src/assets/styles/_index.scss")
+    );
   },
 };
+
+const stylesPath = path
+  .resolve(__dirname, "./src/assets/styles/_index.scss")
+  .replaceAll("\\", "/");
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -28,7 +34,7 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles" as common;\n`,
+        additionalData: `@use "${stylesPath}" as common;\n`,
         importers: [new NodePackageImporter(), stylesImporter],
       },
     },
@@ -46,8 +52,9 @@ export default defineConfig({
         generate: true,
         outputFilePath: path.resolve(__dirname, "./src/@types/style.d.ts"),
       },
-      prettierFilePath: path.resolve("./.prettierrc"),
+      prettierFilePath: path.resolve(__dirname, "./.prettierrc"),
       esmExport: true,
+      legacyFileFormat: false,
     }),
   ],
 });

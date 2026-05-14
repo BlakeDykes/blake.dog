@@ -8,9 +8,9 @@
     "build": "pnpm wasm:build && vite build",
     "preview": "vite preview",
     "wasm:build": "cmd /c \"call \"F:\\Program Files\\emsdk\\emsdk_env.bat\" && emcc -v && node scripts\\build-wasm.mjs\"",
-    "format": "pnpm format:prettier && format:cpp",
+    "format": "pnpm format:prettier && pnpm format:cpp",
     "format:prettier": "prettier --write .",
-    "format:cpp": "clang-format -i src/wasm/**/*.{c,cc,cpp,cxx,h,hpp}"
+    "format:cpp": "node scripts/format-cpp.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
