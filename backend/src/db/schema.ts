@@ -82,7 +82,10 @@ export const posts = pgTable(
     seoTitle: text("seo_title"),
     seoDescription: text("seo_description"),
 
-    metadata: jsonb("metadata").$type<Record<string, unknown>>().default({}),
+    metadata: jsonb("metadata")
+      .$type<Record<string, unknown>>()
+      .notNull()
+      .default({}),
   },
   (table) => [
     uniqueIndex("posts_slug_idx").on(table.slug),

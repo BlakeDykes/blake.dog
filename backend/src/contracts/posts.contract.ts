@@ -36,7 +36,7 @@ export type PublicPostDetail = z.infer<typeof publicPostDetailSchema>;
 
 // -------------------------------------------------------------------------
 // CreatePostInput
-export const createPostInputSchema = z.object({
+export const createPostSchema = z.object({
   type: postTypeSchema,
   title: z.string().min(1).max(200),
   slug: z.string().min(1).max(240).optional(),
@@ -51,14 +51,14 @@ export const createPostInputSchema = z.object({
   tags: z.array(z.string().min(1).max(80)).optional(),
   seoTitle: z.string().max(200).optional(),
 
-  metadata: z.record(z.string(), z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()),
 });
-export type CreatePostInput = z.infer<typeof createPostInputSchema>;
+export type CreatePostInput = z.infer<typeof createPostSchema>;
 // -------------------------------------------------------------------------
 
 // -------------------------------------------------------------------------
 // UpdatePostInput
-export const updatePostInputSchema = z
+export const updatePostSchema = z
   .object({
     type: postTypeSchema.optional(),
 
@@ -78,10 +78,10 @@ export const updatePostInputSchema = z
     seoTitle: z.string().max(200).nullable().optional(),
     seoDescription: z.string().max(300).nullable().optional(),
 
-    metadata: z.record(z.string(), z.unknown()).optional(),
+    metadata: z.record(z.string(), z.unknown()),
   })
   .refine((value) => Object.keys(value).length > 0, {
     message: "At least one field is required.",
   });
-export type UpdatePostInput = z.infer<typeof updatePostInputSchema>;
+export type UpdatePostInput = z.infer<typeof updatePostSchema>;
 // -------------------------------------------------------------------------
