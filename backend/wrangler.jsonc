@@ -10,7 +10,7 @@
     "PUBLIC_APP_ORIGIN": "http://localhost:5173",
   },
   "secrets": {
-    "required": ["DB_URL", "ADMIN_SECRET"],
+    "required": ["DATABASE_URL", "ADMIN_SECRET"],
   },
   "r2_buckets": [
     {

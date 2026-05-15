@@ -11,21 +11,23 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
+import {
+  CONTACT_STATUS_VALUES,
+  POST_MEDIA_USAGE_TYPE_VALUES,
+  POST_STATUS_VALUES,
+  POST_TYPE_VALUES,
+} from "../@types/enum";
 
-export const postType = pgEnum("post_type", ["blog", "project_overview"]);
+export const postType = pgEnum("post_type", POST_TYPE_VALUES);
 
-export const postStatus = pgEnum("post_status", [
-  "draft",
-  "published",
-  "archived",
-]);
+export const postStatus = pgEnum("post_status", POST_STATUS_VALUES);
 
-export const contactStatus = pgEnum("contact_status", [
-  "new",
-  "read",
-  "replied",
-  "spam",
-]);
+export const contactStatus = pgEnum("contact_status", CONTACT_STATUS_VALUES);
+
+export const postMediaUsageType = pgEnum(
+  "media_usage_type",
+  POST_MEDIA_USAGE_TYPE_VALUES
+);
 
 export const mediaAssets = pgTable("media_assets", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -144,9 +146,22 @@ export const postMedia = pgTable(
       .notNull()
       .references(() => mediaAssets.id, { onDelete: "cascade" }),
 
-    usageType: varchar("usage_type", { length: 32 }).notNull(),
+    usageType: postMediaUsageType("usage_type").notNull(),
+
+    sortOrder: integer("sort_order").notNull(),
+
+    embedKey: text("embed_key"),
+
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
   },
-  (table) => [primaryKey({ columns: [table.postId, table.mediaId] })]
+  (table) => [
+    index("post_media_post_id_idx").on(table.postId),
+    index("post_media_media_id_idx").on(table.mediaId),
+    index("post_media_usage_type_idx").on(table.usageType),
+    uniqueIndex("post_media_post_key_idx").on(table.postId, table.embedKey),
+  ]
 );
 
 export const contactRequests = pgTable(
