@@ -1,4 +1,4 @@
-import { PostType, postTypeSchema } from "../@types/enum";
+import { PostType, postTypeSchema } from "@/types/enum";
 import {
   inlineMediaSummarySchema,
   mediaSummarySchema,
@@ -50,6 +50,7 @@ export const createPostSchema = z.object({
 
   tags: z.array(z.string().min(1).max(80)).optional(),
   seoTitle: z.string().max(200).optional(),
+  seoDescription: z.string().max(500).optional(),
 
   metadata: z.record(z.string(), z.unknown()),
 });

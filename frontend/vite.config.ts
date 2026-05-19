@@ -50,7 +50,7 @@ export default defineConfig({
       enabledMode: ["development", "production"],
       global: {
         generate: true,
-        outputFilePath: path.resolve(__dirname, "./src/@types/style.d.ts"),
+        outputFilePath: path.resolve(__dirname, "./src/types/style.d.ts"),
       },
       prettierFilePath: path.resolve(__dirname, "./.prettierrc"),
       esmExport: true,

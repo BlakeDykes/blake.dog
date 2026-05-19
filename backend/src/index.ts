@@ -1,10 +1,12 @@
 import { Hono } from "hono";
-import { AppEnv } from "./@types/app";
-import { getDb } from "./db/client";
+import { AppEnv } from "./types/app";
+import { getDb } from "./middleware/db";
 import { cors } from "hono/cors";
-import { contactRoutes } from "./routes/contact.routes";
-import { mediaRoutes } from "./routes/media.routes";
-import { postsRoutes } from "./routes/posts.routes";
+import { contactRoutes } from "./routes/public/contact.routes";
+import { mediaRoutes } from "./routes/public/media.routes";
+import { postsRoutes } from "./routes/public/posts.routes";
+import { adminPostsRoutes } from "./routes/admin/posts.admin.routes";
+import { authRoutes } from "./routes/public/auth.routes";
 
 const app = new Hono<AppEnv>().basePath("/api");
 
@@ -54,9 +56,12 @@ app.get("/health", (c) => {
   });
 });
 
+app.route("/auth", authRoutes);
 app.route("/posts", postsRoutes);
 app.route("/contact", contactRoutes);
 app.route("/media", mediaRoutes);
+
+app.route("/admin/posts", adminPostsRoutes);
 
 app.notFound((c) => {
   return c.json({ error: "Not found" }, 404);

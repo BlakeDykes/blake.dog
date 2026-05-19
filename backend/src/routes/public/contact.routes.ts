@@ -1,16 +1,15 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { AppEnv } from "../@types/app";
-import { contactRequests } from "../db/schema";
+import { AppEnv } from "@/types/app";
+import { contactRequests } from "@/db/schema";
 import {
   contactRequestParamsSchema,
   contactRequestResponseSchema,
-  contactRequestSchema,
   createContactRequestSchema,
   listContactRequestsQuerySchema,
   type ContactRequestResponse,
-} from "../contracts/contact.contract";
-import { hashIpAddress, normalizeNullableString } from "../utils";
+} from "@/contracts/contact.contract";
+import { hashIpAddress, normalizeNullableString } from "@/utils";
 import { desc, eq, count } from "drizzle-orm";
 
 export const contactRoutes = new Hono<AppEnv>();

@@ -8,6 +8,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
+    "auth:hash-password": "tsx scripts/hash-password.ts",
     "format": "prettier --write ."
   },
   "dependencies": {

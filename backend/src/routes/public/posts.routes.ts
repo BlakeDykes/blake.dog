@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import { AppEnv } from "../@types/app";
-import { mediaAssets, postMedia, posts } from "../db/schema";
+import { AppEnv } from "@/types/app";
+import { mediaAssets, postMedia, posts } from "@/db/schema";
 import { and, asc, desc, eq } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
-import { PublicPostDetail } from "../contracts/posts.contract";
+import { PublicPostDetail } from "@/contracts/posts.contract";
 
 export const postsRoutes = new Hono<AppEnv>();
 

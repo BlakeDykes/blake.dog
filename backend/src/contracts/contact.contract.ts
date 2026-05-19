@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { contactStatusSchema } from "../@types/enum";
+import { contactStatusSchema } from "../types/enum";
 
 // -------------------------------------------------------------------------
 // ContactRequest
