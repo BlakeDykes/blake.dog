@@ -1,36 +1,17 @@
 import { Hono } from "hono";
-import { AppEnv } from "./types/app";
-import { getDb } from "./middleware/db";
 import { cors } from "hono/cors";
-import { contactRoutes } from "./routes/public/contact.routes";
-import { mediaRoutes } from "./routes/public/media.routes";
-import { postsRoutes } from "./routes/public/posts.routes";
-import { adminPostsRoutes } from "./routes/admin/posts.admin.routes";
-import { authRoutes } from "./routes/public/auth.routes";
 
-const app = new Hono<AppEnv>().basePath("/api");
+import { AppEnv } from "./lib/app.types";
 
-app.get("/", (c) => {
-  return c.json({
-    ok: true,
-    service: "blake-dog-backend",
-  });
-});
+import { contactRoutes } from "./features/contact/contact.routes";
+import { mediaRoutes } from "./features/media/media.routes";
+import { postsRoutes } from "./features/posts/posts.routes";
+import { adminPostsRoutes } from "./features/posts/posts.admin.routes";
+import { authRoutes } from "./features/auth/auth.routes";
+import { withDb } from "./db/db.middleware";
+import { applyMiddleware } from "./lib/helpers";
 
-app.use("*", async (c, next) => {
-  const dbUrl = c.env.DATABASE_URL;
-  if (!dbUrl) {
-    return c.json(
-      {
-        error: "DATABASE_URL is not configured",
-      },
-      500
-    );
-  }
-
-  c.set("db", getDb(c.env.DATABASE_URL));
-  await next();
-});
+const app = new Hono<AppEnv>();
 
 app.use(
   "*",
@@ -42,12 +23,20 @@ app.use(
         return origin;
       }
 
-      return allowedOrigin;
+      return null;
     },
+    credentials: true,
     allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization"],
+    allowHeaders: ["Content-Type"],
   })
 );
+
+app.get("/", (c) => {
+  return c.json({
+    ok: true,
+    service: "blake-dog-backend",
+  });
+});
 
 app.get("/health", (c) => {
   return c.json({
@@ -57,10 +46,15 @@ app.get("/health", (c) => {
 });
 
 app.route("/auth", authRoutes);
+
+applyMiddleware(app, withDb, "/posts/*", "/contact/*", "/media/*", "/admin/*");
+
+// public routes
 app.route("/posts", postsRoutes);
 app.route("/contact", contactRoutes);
 app.route("/media", mediaRoutes);
 
+// adminRoutes
 app.route("/admin/posts", adminPostsRoutes);
 
 app.notFound((c) => {

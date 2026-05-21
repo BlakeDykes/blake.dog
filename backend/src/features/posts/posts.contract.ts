@@ -1,9 +1,9 @@
-import { PostType, postTypeSchema } from "@/types/enum";
+import { PostType, postTypeSchema } from "@/lib/enum";
 import {
   inlineMediaSummarySchema,
   mediaSummarySchema,
   postInlineMediaInputSchema,
-} from "./media.contract";
+} from "../media/media.contract";
 import { z } from "zod";
 
 // -------------------------------------------------------------------------

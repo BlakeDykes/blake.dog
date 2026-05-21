@@ -16,7 +16,7 @@ import {
   POST_MEDIA_USAGE_TYPE_VALUES,
   POST_STATUS_VALUES,
   POST_TYPE_VALUES,
-} from "@/types/enum";
+} from "@/lib/enum";
 
 export const postType = pgEnum("post_type", POST_TYPE_VALUES);
 

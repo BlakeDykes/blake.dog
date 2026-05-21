@@ -1,4 +1,5 @@
-import type { getDb } from "../middleware/db";
+import { DbType } from "@/db/db.types";
+import { AdminJwtPayload, AuthPrincipal } from "@/features/auth/auth.contracts";
 
 export type AdminPrincipal = {
   id: "admin";
@@ -11,7 +12,7 @@ export type Bindings = {
 
   ADMIN_USERNAME: string;
   ADMIN_PASSWORD_HASH: string;
-  AUTH_JWT_SECRET: string;
+  JWT_SECRET: string;
 
   PUBLIC_APP_ORIGIN: string;
 
@@ -19,8 +20,9 @@ export type Bindings = {
 };
 
 export type Variables = {
-  db: ReturnType<typeof getDb>;
-  admin: AdminPrincipal;
+  db: DbType;
+  admin: AuthPrincipal;
+  adminJWT: AdminJwtPayload;
 };
 
 export type AppEnv = {

@@ -14,7 +14,7 @@
       "DATABASE_URL",
       "ADMIN_USERNAME",
       "ADMIN_PASSWORD_HASH",
-      "AUTH_JWT_SECRET",
+      "JWT_SECRET",
     ],
   },
   "r2_buckets": [

@@ -1,7 +1,7 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { eq, and, desc, asc, inArray } from "drizzle-orm";
-import type { AppEnv } from "@/types/app";
+import type { AppEnv } from "@/lib/app.types";
 import {
   contactRequests,
   mediaAssets,
@@ -15,9 +15,9 @@ import {
   createPostSchema,
   UpdatePostInput,
   updatePostSchema,
-} from "@/contracts/posts.contract";
-import { requireAdmin } from "@/middleware/require-admin";
-import { requireAdminOrigin } from "@/middleware/require-admin-origin";
+} from "@/features/posts/posts.contract";
+import { requireAdmin } from "@/middleware/auth/reqire-admin.middleware";
+import { requireAdminOrigin } from "@/middleware/auth/require-admin-origin.middleware";
 import { copyDefinedFields, normalizeTags, slugify } from "@/utils";
 import { DIRECT_POST_UPDATE_FIELDS } from "@/types/updateFields";
 

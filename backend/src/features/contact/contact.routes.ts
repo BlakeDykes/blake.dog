@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { AppEnv } from "@/types/app";
+import { AppEnv } from "@/lib/app.types";
 import { contactRequests } from "@/db/schema";
 import {
   contactRequestParamsSchema,
@@ -8,7 +8,7 @@ import {
   createContactRequestSchema,
   listContactRequestsQuerySchema,
   type ContactRequestResponse,
-} from "@/contracts/contact.contract";
+} from "@/features/contact/contact.contract";
 import { hashIpAddress, normalizeNullableString } from "@/utils";
 import { desc, eq, count } from "drizzle-orm";
 
