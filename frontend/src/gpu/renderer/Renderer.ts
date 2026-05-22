@@ -1,4 +1,4 @@
-import shaderWGSL from "../shaders/quad_instanced.wgsl?raw";
+import shaderWGSL from "@/shaders/quad_instanced.wgsl?raw";
 
 export class Renderer {
   private device: GPUDevice;

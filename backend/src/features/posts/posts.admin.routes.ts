@@ -1,30 +1,23 @@
-import { zValidator } from "@hono/zod-validator";
-import { Hono } from "hono";
-import { eq, and, desc, asc, inArray } from "drizzle-orm";
-import type { AppEnv } from "@/lib/app.types";
 import {
-  contactRequests,
   mediaAssets,
   postMedia,
   posts,
   postTags,
-  tags,
+  tags
 } from "@/db/schema";
+import type { AppEnv } from "@/lib/app.types";
+import { zValidator } from "@hono/zod-validator";
+import { and, asc, desc, eq } from "drizzle-orm";
+import { Hono } from "hono";
 
 import {
   createPostSchema,
   UpdatePostInput,
   updatePostSchema,
 } from "@/features/posts/posts.contract";
-import { requireAdmin } from "@/middleware/auth/reqire-admin.middleware";
-import { requireAdminOrigin } from "@/middleware/auth/require-admin-origin.middleware";
 import { copyDefinedFields, normalizeTags, slugify } from "@/utils";
-import { DIRECT_POST_UPDATE_FIELDS } from "@/types/updateFields";
 
 export const adminPostsRoutes = new Hono<AppEnv>();
-
-adminPostsRoutes.use("*", requireAdmin);
-adminPostsRoutes.use("*", requireAdminOrigin);
 
 const setInlineMediaForPost = async ({
   db,

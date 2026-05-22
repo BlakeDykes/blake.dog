@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { resizeCanvasToDisplaySize } from "../gpu/utils";
-import { initWebGPU } from "../gpu/initWebGPU";
-import { loadParticlesModule } from "../wasm/particles/loadParticles";
-import { Renderer } from "../gpu/renderer/Renderer";
+import { resizeCanvasToDisplaySize } from "@/gpu/utils";
+import { initWebGPU } from "@/gpu/initWebGPU";
+import { loadParticlesModule } from "@/wasm/particles/loadParticles";
+import { Renderer } from "@/gpu/renderer/Renderer";
 
 const PARTICLE_COUNT = 500;
 

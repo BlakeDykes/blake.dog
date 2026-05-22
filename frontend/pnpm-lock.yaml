@@ -13,6 +13,12 @@ importers:
       "@base-ui/react":
         specifier: ^1.4.1
         version: 1.4.1(@types/react@19.2.9)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      "@tanstack/react-query":
+        specifier: ^5.100.11
+        version: 5.100.11(react@19.2.3)
+      "@tanstack/react-query-devtools":
+        specifier: ^5.100.11
+        version: 5.100.11(@tanstack/react-query@5.100.11(react@19.2.3))(react@19.2.3)
       "@tanstack/react-router":
         specifier: ^1.169.2
         version: 1.169.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -25,6 +31,9 @@ importers:
       react-dom:
         specifier: ^19.2.0
         version: 19.2.3(react@19.2.3)
+      react-hook-form:
+        specifier: ^7.76.0
+        version: 7.76.0(react@19.2.3)
     devDependencies:
       "@eslint/js":
         specifier: ^9.39.1
@@ -738,6 +747,35 @@ packages:
         integrity: sha512-NaOGLRrddszbQj9upGat6HG/4TKvXLvu+osAIgfxPYA+eIvYKv8GKDJOrY2D3/U9MRnKfMWD7bU4jeD4xmqyIg==,
       }
     engines: { node: ">=20.19" }
+
+  "@tanstack/query-core@5.100.11":
+    resolution:
+      {
+        integrity: sha512-lmE0994apShXPj8CUxgx4ch5yUJhE9k/+tVwihBvPOyerACWdBocfFg24t8+0RhtlTd7tEgchDkhlCxNssvDxw==,
+      }
+
+  "@tanstack/query-devtools@5.100.11":
+    resolution:
+      {
+        integrity: sha512-47rVBDuGMW/A4ekt3YQdz+q0JSIwktwGnWCYyQUvSs2/g/Oa+6Fi2/IQk4/Y4vf6u1uwI7hOogHslgMC8f3X/Q==,
+      }
+
+  "@tanstack/react-query-devtools@5.100.11":
+    resolution:
+      {
+        integrity: sha512-75RFlJEG53Ed/Cxe5WLmgIpOElPNpgLZq7h0fLFnM5XwTYxSTk1rX/gC6MqGVXsSdrbP7zn7hPSJx9MinwiUHA==,
+      }
+    peerDependencies:
+      "@tanstack/react-query": ^5.100.11
+      react: ^18 || ^19
+
+  "@tanstack/react-query@5.100.11":
+    resolution:
+      {
+        integrity: sha512-J0f9s5x3LE1450nNNfYx+e/n0DMa0uOBdFJUy5r0RvmsXd4nB/n0rbHtHI1vYXhikNFan+wf51p6Tmp4c8ucrg==,
+      }
+    peerDependencies:
+      react: ^18 || ^19
 
   "@tanstack/react-router-devtools@1.166.13":
     resolution:
@@ -1922,6 +1960,15 @@ packages:
     peerDependencies:
       react: ^19.2.3
 
+  react-hook-form@7.76.0:
+    resolution:
+      {
+        integrity: sha512-eKtLGgFeSgkHqQD8J59AMZ9a4uD1D83iSIzt4YlTGD7liDen5rrjcUO1rVIGd9yC1gofryjtHbv+4ny4hkLWlw==,
+      }
+    engines: { node: ">=18.0.0" }
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+
   react-refresh@0.18.0:
     resolution:
       {
@@ -2831,6 +2878,21 @@ snapshots:
 
   "@tanstack/history@1.161.6": {}
 
+  "@tanstack/query-core@5.100.11": {}
+
+  "@tanstack/query-devtools@5.100.11": {}
+
+  "@tanstack/react-query-devtools@5.100.11(@tanstack/react-query@5.100.11(react@19.2.3))(react@19.2.3)":
+    dependencies:
+      "@tanstack/query-devtools": 5.100.11
+      "@tanstack/react-query": 5.100.11(react@19.2.3)
+      react: 19.2.3
+
+  "@tanstack/react-query@5.100.11(react@19.2.3)":
+    dependencies:
+      "@tanstack/query-core": 5.100.11
+      react: 19.2.3
+
   "@tanstack/react-router-devtools@1.166.13(@tanstack/react-router@1.169.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@tanstack/router-core@1.169.2)(csstype@3.2.3)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)":
     dependencies:
       "@tanstack/react-router": 1.169.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -3538,6 +3600,10 @@ snapshots:
     dependencies:
       react: 19.2.3
       scheduler: 0.27.0
+
+  react-hook-form@7.76.0(react@19.2.3):
+    dependencies:
+      react: 19.2.3
 
   react-refresh@0.18.0: {}
 

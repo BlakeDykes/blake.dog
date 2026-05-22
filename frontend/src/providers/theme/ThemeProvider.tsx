@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { browser } from "../../utils/browser";
+import { browser } from "@/utils/browser";
 import type { ThemeMode, ThemeModeContext } from "./types";
 import { ThemeModeCtx } from "./context";
 
