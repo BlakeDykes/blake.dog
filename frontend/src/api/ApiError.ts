@@ -68,11 +68,11 @@ export class ApiParseError extends Error {
   }
 }
 
-export const getApiErrorStatus = (error : unknown) => {
-  if(!(error instanceof ApiError)) return undefined;
+export const getApiErrorStatus = (error: unknown) => {
+  if (!(error instanceof ApiError)) return undefined;
   return error.status;
-}
+};
 
 export const isUnauthorizedError = (error: unknown) => {
   return getApiErrorStatus(error) === 401;
-}
+};

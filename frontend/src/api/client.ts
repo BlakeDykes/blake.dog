@@ -1,7 +1,7 @@
 import { ApiError, ApiParseError } from "./ApiError";
 import type { ApiClientOptions, JsonBody } from "./types";
 
-export const isJsonBody = (body: ApiClientOptions["body"]) : body is JsonBody => 
+export const isJsonBody = (body: ApiClientOptions["body"]): body is JsonBody =>
   body !== undefined &&
   body !== null &&
   !(body instanceof FormData) &&
@@ -10,13 +10,16 @@ export const isJsonBody = (body: ApiClientOptions["body"]) : body is JsonBody =>
   !(body instanceof URLSearchParams) &&
   !(typeof ReadableStream !== "undefined" && body instanceof ReadableStream);
 
-export const parseResponseBody = async<T>(response : Response, path: string) : Promise<T> => {
+export const parseResponseBody = async <T>(
+  response: Response,
+  path: string
+): Promise<T> => {
   const text = await response.text();
-  if(!text) {
+  if (!text) {
     throw new ApiParseError({
       message: `Expected JSON response from ${path}, but response body is empty.`,
       status: response.status,
-      path
+      path,
     });
   }
 
@@ -26,19 +29,18 @@ export const parseResponseBody = async<T>(response : Response, path: string) : P
     throw new ApiParseError({
       message: `Expected JSON response from ${path}, but parsing failed.`,
       status: response.status,
-      path
+      path,
     });
   }
+};
 
-}
-
-export const buildRequestInit = (options: ApiClientOptions) : RequestInit => {
+export const buildRequestInit = (options: ApiClientOptions): RequestInit => {
   const { body, headers, ...rest } = options;
 
   const reqHeaders = new Headers(headers);
-  let reqBody : BodyInit | null | undefined;
+  let reqBody: BodyInit | null | undefined;
 
-  if(isJsonBody(body)) {
+  if (isJsonBody(body)) {
     reqHeaders.set("Content-Type", "application/json");
     reqBody = JSON.stringify(body);
   } else {
@@ -49,33 +51,29 @@ export const buildRequestInit = (options: ApiClientOptions) : RequestInit => {
     ...rest,
     headers: reqHeaders,
     body: reqBody,
-    credentials: "include"
-  }
-}
+    credentials: "include",
+  };
+};
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
 export const apiFetch = async <T>(
-  path: string, 
+  path: string,
   options: ApiClientOptions = {}
-) : Promise<T> => {
+): Promise<T> => {
+  const res = await fetch(`${API_BASE_URL}${path}`, buildRequestInit(options));
 
-  const res = await fetch(
-    `${API_BASE_URL}${path}`, 
-    buildRequestInit(options)
-  );
-
-  if(!res.ok) {
+  if (!res.ok) {
     throw await ApiError.fromResponse(res);
   }
 
-  if(res.status === 204) {
+  if (res.status === 204) {
     throw new ApiParseError({
       message: `Expected JSON response from ${path}, but received 204 no Content`,
       status: res.status,
-      path
-    })
+      path,
+    });
   }
 
   return parseResponseBody<T>(res, path);
-}
+};

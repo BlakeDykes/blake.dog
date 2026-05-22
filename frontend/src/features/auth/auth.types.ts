@@ -30,19 +30,19 @@ export type AuthStatus =
   | "authenticating"
   | "logging-out";
 
-  export type LoginMutateAsync = UseMutateAsyncFunction<
-    AuthResponse,
-    ApiError,
-    ApiMutationVariables<LoginInput>,
-    unknown
-  >;
+export type LoginMutateAsync = UseMutateAsyncFunction<
+  AuthResponse,
+  ApiError,
+  ApiMutationVariables<LoginInput>,
+  unknown
+>;
 
-  export type LogoutMutateAsync = UseMutateAsyncFunction<
-    LogoutResponse,
-    ApiError,
-    ApiMutationVariables<never>,
-    unknown
-  >
+export type LogoutMutateAsync = UseMutateAsyncFunction<
+  LogoutResponse,
+  ApiError,
+  ApiMutationVariables<never>,
+  unknown
+>;
 
 export type AuthContext = {
   principal: AuthPrincipal;

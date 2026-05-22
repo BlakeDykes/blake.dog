@@ -4,25 +4,24 @@ import { apiFetch } from "./client";
 import type { ApiGetQueryKey } from "./types";
 import { resolveApiPath } from "./url";
 
-
-export const defaultQueryFn : QueryFunction<unknown, ApiGetQueryKey> = ({
+export const defaultQueryFn: QueryFunction<unknown, ApiGetQueryKey> = ({
   queryKey,
-  signal
+  signal,
 }) => {
   const [, method, path, options] = queryKey;
 
-  if(method !== "GET") {
+  if (method !== "GET") {
     throw new Error(`Unsupported default query method: ${method}`);
   }
 
   const genPath = resolveApiPath({
     path,
     pathParams: options?.pathParams,
-    searchParams: options?.searchParams
+    searchParams: options?.searchParams,
   });
 
   return apiFetch<unknown>(genPath, {
     method,
-    signal
+    signal,
   });
-}
+};

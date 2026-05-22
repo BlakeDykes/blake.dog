@@ -52,3 +52,10 @@ export type UseApiMutationOptions<
   UseMutationOptions<TResult, TError, ApiMutationVariables<TBody>, TContext>,
   "mutationFn"
 >;
+
+export type SearchParams = Record<
+  string,
+  string | number | boolean | null | undefined
+>;
+
+export type PathParams = Record<string, string | number>;
