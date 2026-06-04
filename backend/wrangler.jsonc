@@ -8,6 +8,7 @@
   // ],
   "vars": {
     "PUBLIC_APP_ORIGIN": "http://localhost:5173",
+    "PUBLIC_MEDIA_URL": "",
   },
   "secrets": {
     "required": [

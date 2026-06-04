@@ -32,3 +32,20 @@ export const postInlineMediaInputSchema = z.object({
 });
 export type PostInlineMediaInput = z.infer<typeof postInlineMediaInputSchema>;
 // -------------------------------------------------------------------------
+
+export const uploadMediaInputSchema = z.object({
+  altText: z.string().max(300).optional(),
+  width: z.coerce.number().int().positive().optional(),
+  height: z.coerce.number().int().positive().optional(),
+});
+export type UploadMediaInput = z.infer<typeof uploadMediaInputSchema>;
+
+export const updateMediaSchema = z
+  .object({
+    altText: z.string().max(300).nullable().optional(),
+    caption: z.string().max(500).nullable().optional(),
+  })
+  .refine((d) => Object.values(d).some((v) => v !== undefined), {
+    message: "At least one value is required",
+  });
+export type UpdateMediaSchema = z.infer<typeof updateMediaSchema>;

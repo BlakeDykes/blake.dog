@@ -15,6 +15,7 @@ export type Bindings = {
   JWT_SECRET: string;
 
   PUBLIC_APP_ORIGIN: string;
+  PUBLIC_MEDIA_URL?: string;
 
   MEDIA_BUCKET: R2Bucket;
 };

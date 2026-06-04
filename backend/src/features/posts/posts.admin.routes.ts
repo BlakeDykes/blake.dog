@@ -1,10 +1,4 @@
-import {
-  mediaAssets,
-  postMedia,
-  posts,
-  postTags,
-  tags
-} from "@/db/schema";
+import { mediaAssets, postMedia, posts, postTags, tags } from "@/db/schema";
 import type { AppEnv } from "@/lib/app.types";
 import { zValidator } from "@hono/zod-validator";
 import { and, asc, desc, eq } from "drizzle-orm";

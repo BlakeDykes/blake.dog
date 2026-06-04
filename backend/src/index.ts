@@ -5,9 +5,11 @@ import { AppEnv } from "./lib/app.types";
 
 import { contactRoutes } from "./features/contact/contact.routes";
 import { mediaRoutes } from "./features/media/media.routes";
+import { adminMediaRoutes } from "./features/media/media.admin.routes";
 import { postsRoutes } from "./features/posts/posts.routes";
 import { adminPostsRoutes } from "./features/posts/posts.admin.routes";
 import { authRoutes } from "./features/auth/auth.routes";
+import { requireAdmin } from "./features/auth/auth.middleware";
 import { withDb } from "./db/db.middleware";
 import { applyMiddleware } from "./lib/helpers";
 
@@ -48,14 +50,16 @@ app.get("/health", (c) => {
 app.route("/auth", authRoutes);
 
 applyMiddleware(app, withDb, "/posts/*", "/contact/*", "/media/*", "/admin/*");
+applyMiddleware(app, requireAdmin, "/admin/*");
 
 // public routes
 app.route("/posts", postsRoutes);
 app.route("/contact", contactRoutes);
 app.route("/media", mediaRoutes);
 
-// adminRoutes
+// admin routes
 app.route("/admin/posts", adminPostsRoutes);
+app.route("/admin/media", adminMediaRoutes);
 
 app.notFound((c) => {
   return c.json({ error: "Not found" }, 404);
