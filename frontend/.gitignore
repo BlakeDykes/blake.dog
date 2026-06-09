@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# TanStack Start / Vinxi outputs
+.vinxi/
+.output/
+
+# Common Deployment Platform Artifacts
+.vercel/
+.netlify/
+.wrangler/
+dist/
+
+# Environment Variables
+.env
+.env*.local
+
+# IDE and System Files
+.DS_Store
+*.local
+*.log*
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# TanStack artifacts
+.tanstack/

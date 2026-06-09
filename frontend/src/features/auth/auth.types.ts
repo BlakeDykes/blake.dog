@@ -15,13 +15,15 @@ export type LoginInput = {
   password: string;
 };
 
-export type AuthResponse = {
-  data: AuthPrincipal;
-};
-
 export type LogoutResponse = {
   ok: true;
 };
+
+export type LoginResponse = {
+  data: AuthPrincipal;
+};
+
+export type AuthResponse = LoginResponse | LogoutResponse | undefined;
 
 export type AuthStatus =
   | "checking"
@@ -30,27 +32,27 @@ export type AuthStatus =
   | "authenticating"
   | "logging-out";
 
-export type LoginMutateAsync = UseMutateAsyncFunction<
-  AuthResponse,
-  ApiError,
-  ApiMutationVariables<LoginInput>,
-  unknown
->;
+// export type LoginMutateAsync = UseMutateAsyncFunction<
+//   AuthResponse,
+//   ApiError,
+//   ApiMutationVariables<LoginInput>,
+//   unknown
+// >;
 
-export type LogoutMutateAsync = UseMutateAsyncFunction<
-  LogoutResponse,
-  ApiError,
-  ApiMutationVariables<never>,
-  unknown
->;
+// export type LogoutMutateAsync = UseMutateAsyncFunction<
+//   LogoutResponse,
+//   ApiError,
+//   ApiMutationVariables<never>,
+//   unknown
+// >;
 
 export type AuthContext = {
-  principal: AuthPrincipal;
+  principal: AuthPrincipal | null;
   status: AuthStatus;
   isChecking: boolean;
   isAuthenticated: boolean;
   error: unknown;
-  login: (input: LoginInput) => Promise<AuthPrincipal>;
+  login: (input: LoginInput) => Promise<AuthResponse>;
   logout: () => Promise<void>;
-  refresh: () => Promise<AuthPrincipal>;
+  refresh: () => Promise<void>;
 };

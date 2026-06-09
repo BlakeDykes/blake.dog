@@ -7,11 +7,13 @@ export const loginSchema = z.object({
 });
 export type LoginInput = z.infer<typeof loginSchema>;
 
-export const authPrincipalSchema = z.object({
-  id: z.literal("admin"),
-  username: z.string(),
-  role: z.literal("admin"),
-});
+export const authPrincipalSchema = z
+  .object({
+    id: z.literal("admin"),
+    username: z.string(),
+    role: z.literal("admin"),
+  })
+  .nullable();
 export type AuthPrincipal = z.infer<typeof authPrincipalSchema>;
 
 export const authResponseSchema = z.object({

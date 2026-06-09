@@ -104,7 +104,8 @@ button:focus-visible {
 
 @font-face {
   font-family: "Convection";
-  src: local("Conv"), url("../fonts/Convection/Conv.woff2"), format("woff2");
+  src:
+    local("Conv"), url("../assets/fonts/Convection/Conv.woff2"), format("woff2");
   font-weight: 400;
   font-style: normal;
 }
@@ -112,14 +113,17 @@ button:focus-visible {
 @font-face {
   font-family: "Convection";
   src:
-    local("Convmd"), url("../fonts/Convection/Convmd.woff2"), format("woff2");
+    local("Convmd"), url("../assets/fonts/Convection/Convmd.woff2"),
+    format("woff2");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Convection";
-  src: local("Convb"), url("../fonts/Convection/Convb.woff2"), format("woff2");
+  src:
+    local("Convb"), url("../assets/fonts/Convection/Convb.woff2"),
+    format("woff2");
   font-weight: 700;
   font-style: normal;
 }

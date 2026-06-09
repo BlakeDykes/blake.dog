@@ -48,7 +48,7 @@ export type ContactRequestResponse = z.infer<
 // ---- i.e. const input = createContactRequestSchema.parse(req.body);
 export const createContactRequestSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(120),
-  email: z.string().trim().max(320),
+  email: z.string().trim().min(1, "Email is required").max(320).email(),
   subject: z.string().trim().max(200).optional().nullable(),
   message: z.string().trim().min(1, "Message is required").max(5000),
   sourcePage: z.string().trim().max(500).optional().nullable(),

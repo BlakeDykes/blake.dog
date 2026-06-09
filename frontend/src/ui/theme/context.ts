@@ -1,4 +1,4 @@
-import { createStrictContext } from "@/providers/utils";
+import { createStrictContext } from "@/utils/provider";
 import { type ThemeModeContext } from "./types";
 
 export const [ThemeModeCtx, useThemeMode] =

@@ -1,6 +1,7 @@
 # Ignore artifacts:
 build
 coverage
+routeTree.gen.ts
 src/wasm/**/*.cpp
 src/wasm/**/*.js
 src/wasm/**/*.wasm

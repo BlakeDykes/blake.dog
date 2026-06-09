@@ -1,16 +1,23 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { GlobalProvider } from "@/providers/GlobalProvider";
 import { PageScaffold } from "@/ui/components/pageScaffold";
+import type { AuthContext } from "@/features/auth/auth.types";
+import { ThemeProvider } from "@/ui/theme/ThemeProvider";
 
-const RootLayout = () => {
+export interface RouterContext {
+  auth: AuthContext;
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
+  component: RootComponent,
+});
+
+function RootComponent() {
   return (
-    <GlobalProvider>
+    <ThemeProvider>
       <PageScaffold />
       <Outlet />
       <TanStackRouterDevtools initialIsOpen={false} />
-    </GlobalProvider>
+    </ThemeProvider>
   );
-};
-
-export const Route = createRootRoute({ component: RootLayout });
+}

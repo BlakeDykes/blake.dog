@@ -26,7 +26,7 @@ export const toSearchString = (params?: SearchParams): string => {
 
   const qs = searchParams.toString();
 
-  return qs ? qs : "";
+  return qs ? `?${qs}` : "";
 };
 
 export const resolveApiPath = ({

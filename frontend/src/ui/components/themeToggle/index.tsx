@@ -1,6 +1,6 @@
 import { MoonSVG } from "@/assets/svg/moon";
 import { SunSVG } from "@/assets/svg/sun";
-import { useThemeMode } from "@/providers/theme/context";
+import { useThemeMode } from "@/ui/theme/context";
 import { Toggle } from "@/ui/shared/toggle";
 import styles from "./index.module.scss";
 import { useCallback } from "react";

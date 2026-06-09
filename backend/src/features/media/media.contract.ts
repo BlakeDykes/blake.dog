@@ -49,3 +49,9 @@ export const updateMediaSchema = z
     message: "At least one value is required",
   });
 export type UpdateMediaSchema = z.infer<typeof updateMediaSchema>;
+
+export const listMediaQuerySchema = z.object({
+  limit: z.coerce.number().int().min(1).max(100).default(50),
+  offset: z.coerce.number().int().min(0).default(0),
+});
+export type ListMediaQuery = z.infer<typeof listMediaQuerySchema>;

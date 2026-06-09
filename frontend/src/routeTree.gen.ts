@@ -8,88 +8,184 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as LoginRouteImport } from "./routes/login";
-import { Route as AboutRouteImport } from "./routes/about";
-import { Route as IndexRouteImport } from "./routes/index";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminPostsRouteImport } from './routes/admin/posts'
+import { Route as AdminMediaRouteImport } from './routes/admin/media'
 
 const LoginRoute = LoginRouteImport.update({
-  id: "/login",
-  path: "/login",
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AboutRoute = AboutRouteImport.update({
-  id: "/about",
-  path: "/about",
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminPostsRoute = AdminPostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/login": typeof LoginRoute;
+  '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/login': typeof LoginRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/posts': typeof AdminPostsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/login": typeof LoginRoute;
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/login': typeof LoginRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/posts': typeof AdminPostsRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  "/": typeof IndexRoute;
-  "/about": typeof AboutRoute;
-  "/login": typeof LoginRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/login': typeof LoginRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/posts': typeof AdminPostsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/about" | "/login";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/about" | "/login";
-  id: "__root__" | "/" | "/about" | "/login";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/about'
+    | '/login'
+    | '/admin/media'
+    | '/admin/posts'
+    | '/admin/'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/about' | '/login' | '/admin/media' | '/admin/posts' | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/about'
+    | '/login'
+    | '/admin/media'
+    | '/admin/posts'
+    | '/admin/'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AboutRoute: typeof AboutRoute;
-  LoginRoute: typeof LoginRoute;
+  IndexRoute: typeof IndexRoute
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  LoginRoute: typeof LoginRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/login": {
-      id: "/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof LoginRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/about": {
-      id: "/about";
-      path: "/about";
-      fullPath: "/about";
-      preLoaderRoute: typeof AboutRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/posts': {
+      id: '/admin/posts'
+      path: '/posts'
+      fullPath: '/admin/posts'
+      preLoaderRoute: typeof AdminPostsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
   }
 }
 
+interface AdminRouteRouteChildren {
+  AdminMediaRoute: typeof AdminMediaRoute
+  AdminPostsRoute: typeof AdminPostsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminMediaRoute: AdminMediaRoute,
+  AdminPostsRoute: AdminPostsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()

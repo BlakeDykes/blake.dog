@@ -1,4 +1,4 @@
-import { hashPassword } from "@/auth/password";
+import { hashPassword } from "@/features/auth/auth.utils";
 
 const password = process.argv[2];
 

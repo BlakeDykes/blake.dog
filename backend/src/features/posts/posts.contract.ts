@@ -52,7 +52,7 @@ export const createPostSchema = z.object({
   seoTitle: z.string().max(200).optional(),
   seoDescription: z.string().max(500).optional(),
 
-  metadata: z.record(z.string(), z.unknown()),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 export type CreatePostInput = z.infer<typeof createPostSchema>;
 // -------------------------------------------------------------------------
@@ -79,7 +79,7 @@ export const updatePostSchema = z
     seoTitle: z.string().max(200).nullable().optional(),
     seoDescription: z.string().max(300).nullable().optional(),
 
-    metadata: z.record(z.string(), z.unknown()),
+    metadata: z.record(z.string(), z.unknown()).optional(),
   })
   .refine((value) => Object.keys(value).length > 0, {
     message: "At least one field is required.",

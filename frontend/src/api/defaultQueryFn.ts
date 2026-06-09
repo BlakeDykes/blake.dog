@@ -1,13 +1,14 @@
 import { type QueryFunction } from "@tanstack/react-query";
 
 import { apiFetch } from "./client";
-import type { ApiGetQueryKey } from "./types";
 import { resolveApiPath } from "./url";
+import { isGetQueryKey } from "./queryKeys";
 
-export const defaultQueryFn: QueryFunction<unknown, ApiGetQueryKey> = ({
-  queryKey,
-  signal,
-}) => {
+export const defaultQueryFn: QueryFunction = ({ queryKey, signal }) => {
+  if (!isGetQueryKey(queryKey)) {
+    throw new Error(`Unexpected query key shape: ${JSON.stringify(queryKey)}`);
+  }
+
   const [, method, path, options] = queryKey;
 
   if (method !== "GET") {

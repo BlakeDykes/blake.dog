@@ -5,6 +5,7 @@ import z from "zod";
 
 import { AppEnv } from "@/lib/app.types";
 import { mediaAssets } from "@/db/schema";
+import { listMediaQuerySchema } from "@/features/media/media.contract";
 
 export const adminMediaRoutes = new Hono<AppEnv>();
 
@@ -29,20 +30,23 @@ const updateMediaSchema = z
     message: "At least one field is required",
   });
 
-adminMediaRoutes.get("/", async (c) => {
-  const db = c.get("db");
-  const limit = Math.min(Number(c.req.query("limit") ?? 50), 100);
-  const offset = Number(c.req.query("offset") ?? 0);
+adminMediaRoutes.get(
+  "/",
+  zValidator("query", listMediaQuerySchema),
+  async (c) => {
+    const db = c.get("db");
+    const { limit, offset } = c.req.valid("query");
 
-  const results = await db
-    .select()
-    .from(mediaAssets)
-    .orderBy(desc(mediaAssets.createdAt))
-    .limit(limit)
-    .offset(offset);
+    const results = await db
+      .select()
+      .from(mediaAssets)
+      .orderBy(desc(mediaAssets.createdAt))
+      .limit(limit)
+      .offset(offset);
 
-  return c.json({ data: results }, 200);
-});
+    return c.json({ data: results }, 200);
+  }
+);
 
 adminMediaRoutes.post("/", async (c) => {
   const formData = await c.req.formData();

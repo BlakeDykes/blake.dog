@@ -1,14 +1,12 @@
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo } from "react";
 import {
-  AuthContext,
-  AuthStatus,
-  type AuthPrincipal,
+  type AuthContext,
   type AuthResponse,
+  type AuthStatus,
   type LoginInput,
-  type LoginMutateAsync,
-  type LogoutMutateAsync,
+  type LoginResponse,
   type LogoutResponse,
-} from "../../features/auth/auth.types";
+} from "@/features/auth/auth.types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { authKeys } from "@/features/auth/auth.keys";
 import { useApiMutation } from "@/api/hooks";
@@ -22,12 +20,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const authQuery = useQuery<
     AuthResponse,
     ApiError,
-    AuthPrincipal | undefined,
+    AuthContext["principal"],
     ApiGetQueryKey
   >({
     queryKey: authKeys.user(),
     retry: false,
-    select: (response) => response.data,
+    select: (res) =>
+      (res as LoginResponse)?.data ? (res as LoginResponse).data : null,
   });
 
   const clearNonAuthQueries = useCallback(() => {
@@ -40,43 +39,38 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     method: "POST",
     path: "/auth/logout",
     options: {
-      onSettled: () => {
+      onSuccess: (res) => {
         clearNonAuthQueries();
-        queryClient.setQueryData<AuthResponse | undefined>(
-          authKeys.user(),
-          undefined
-        );
+        if (res?.ok) {
+          queryClient.setQueryData<AuthResponse>(authKeys.user(), res);
+        }
       },
     },
   });
-  const logoutMutateAsync: LogoutMutateAsync = logoutMutation.mutateAsync;
 
   const loginMutation = useApiMutation<AuthResponse, LoginInput, ApiError>({
     method: "POST",
     path: "/auth/login",
     options: {
-      onSuccess: (response) => {
+      onSuccess: (res) => {
         clearNonAuthQueries();
-        queryClient.setQueryData<AuthResponse>(authKeys.user(), response);
+        queryClient.setQueryData<AuthResponse>(authKeys.user(), res);
       },
     },
   });
-  const loginMutateAsync: LoginMutateAsync = loginMutation.mutateAsync;
 
   const login = useCallback(
     async (input: LoginInput) => {
-      const res = await loginMutateAsync({
+      return await loginMutation.mutateAsync({
         body: input,
       });
-
-      return res.data;
     },
-    [loginMutateAsync]
+    [loginMutation]
   );
 
   const logout = useCallback(async () => {
-    return await logoutMutateAsync({});
-  }, [logoutMutateAsync]);
+    await logoutMutation.mutateAsync({});
+  }, [logoutMutation]);
 
   const refresh = useCallback(async () => {
     await queryClient.invalidateQueries({
@@ -84,7 +78,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     });
   }, [queryClient]);
 
-  const principal = authQuery.data;
+  const principal = authQuery.data ?? null;
 
   const status = useMemo<AuthStatus>(() => {
     if (loginMutation.isPending) return "authenticating";
@@ -107,16 +101,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const error =
     loginMutation.error ?? logoutMutation.error ?? authError ?? null;
 
-  const value = useMemo<AuthContext>(() => ({
-    principal,
-    status,
-    isChecking: status === "checking",
-    isAuthenticated: status === "authenticated",
-    error,
-    login,
-    logout,
-    refresh,
-  }));
+  const value = useMemo<AuthContext>(
+    () => ({
+      principal,
+      status,
+      isChecking: status === "checking",
+      isAuthenticated: status === "authenticated",
+      error,
+      login,
+      logout,
+      refresh,
+    }),
+    [principal, status, error, login, logout, refresh]
+  );
 
   return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;
 };

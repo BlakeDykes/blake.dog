@@ -11,14 +11,12 @@ const stylesImporter: FileImporter<"async"> = {
     if (url !== "@/styles") {
       return null;
     }
-    return pathToFileURL(
-      path.resolve(__dirname, "./src/assets/styles/_index.scss")
-    );
+    return pathToFileURL(path.resolve(__dirname, "./src/styles/_index.scss"));
   },
 };
 
 const stylesPath = path
-  .resolve(__dirname, "./src/assets/styles/_index.scss")
+  .resolve(__dirname, "./src/styles/_index.scss")
   .replaceAll("\\", "/");
 
 // https://vite.dev/config/
@@ -44,6 +42,7 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:8787",
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
