@@ -1,0 +1,23 @@
+{
+  "name": "blake_dog-root",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monorepo root: shared tooling and CI/CD orchestration for the blake_dog frontend + backend.",
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "install:all": "pnpm install && pnpm --dir frontend install && pnpm --dir backend install",
+    "format": "pnpm --dir frontend format && pnpm --dir backend format",
+    "format:check": "pnpm --dir frontend exec prettier --check . && pnpm --dir backend exec prettier --check .",
+    "lint": "pnpm --dir frontend exec eslint ."
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7"
+  }
+}
