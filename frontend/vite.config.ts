@@ -25,6 +25,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    dedupe: ["react", "react-dom", "@base-ui/react"],
   },
   css: {
     modules: {
@@ -46,6 +47,7 @@ export default defineConfig({
       },
     },
   },
+  optimizeDeps: { exclude: ["@blakedykes/ui"] },
   plugins: [
     tanstackRouter({
       target: "react",

@@ -1,4 +1,4 @@
-import { Header } from "@/ui/shared/header";
+import { Heading } from "@blakedykes/ui";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/admin/")({
@@ -8,7 +8,7 @@ export const Route = createFileRoute("/admin/")({
 function AdminDashboardComponent() {
   return (
     <div>
-      <Header Component="h1">Admin: Dashboard</Header>
+      <Heading level={1}>Admin: Dashboard</Heading>
     </div>
   );
 }

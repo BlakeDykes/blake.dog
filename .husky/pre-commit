@@ -1,1 +1,13 @@
+# Block committing @blakedykes/ui as a local link:/file: dependency.
+# Checks the STAGED copy only, so you can still commit other work while linked —
+# this fails only when the link itself is part of the commit.
+staged_pkg=$(git show ":frontend/package.json" 2>/dev/null) || staged_pkg=""
+if printf '%s' "$staged_pkg" | grep -qE '"@blakedykes/ui": *"(link|file):'; then
+  echo "✗ Commit blocked: staged frontend/package.json links @blakedykes/ui to a local path."
+  echo "  Switch to the published package, then re-stage:"
+  echo "      pnpm --dir frontend run ds:unlink"
+  echo "      git add frontend/package.json frontend/pnpm-lock.yaml"
+  exit 1
+fi
+
 pnpm exec lint-staged

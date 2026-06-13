@@ -1,7 +1,3 @@
-import type { ApiError } from "@/api/ApiError";
-import type { ApiMutationVariables } from "@/api/types";
-import type { UseMutateAsyncFunction } from "@tanstack/react-query";
-
 export type AuthRole = "admin";
 
 export type AuthPrincipal = {
@@ -31,20 +27,6 @@ export type AuthStatus =
   | "authenticated"
   | "authenticating"
   | "logging-out";
-
-// export type LoginMutateAsync = UseMutateAsyncFunction<
-//   AuthResponse,
-//   ApiError,
-//   ApiMutationVariables<LoginInput>,
-//   unknown
-// >;
-
-// export type LogoutMutateAsync = UseMutateAsyncFunction<
-//   LogoutResponse,
-//   ApiError,
-//   ApiMutationVariables<never>,
-//   unknown
-// >;
 
 export type AuthContext = {
   principal: AuthPrincipal | null;

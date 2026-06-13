@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/ui/shared/header";
-import { Flex } from "@/ui/shared/container/flex";
+import { Heading, Stack } from "@blakedykes/ui";
 
 export const Route = createFileRoute("/")({
   component: IndexComponent,
@@ -8,8 +7,8 @@ export const Route = createFileRoute("/")({
 
 function IndexComponent() {
   return (
-    <Flex>
-      <Header Component="h1">Home</Header>
-    </Flex>
+    <Stack>
+      <Heading level={1}>Home</Heading>
+    </Stack>
   );
 }

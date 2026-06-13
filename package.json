@@ -2,7 +2,7 @@
   "name": "blake_dog-root",
   "private": true,
   "version": "0.0.0",
-  "description": "Monorepo root: shared tooling and CI/CD orchestration for the blake_dog frontend + backend.",
+  "description": "Monorepo root: shared tooling and CI/CD orchestration for blake_dog.",
   "type": "module",
   "packageManager": "pnpm@10.28.0",
   "engines": {
@@ -10,6 +10,9 @@
     "pnpm": ">=10"
   },
   "scripts": {
+    "dev": "start cmd /k \"cd ./backend && pnpm dev\" && start cmd /k \"cd ./frontend && pnpm dev\"",
+    "dev:frontend": "pnpm --dir frontend dev",
+    "dev:backend": "pnpm --dir backend dev",
     "prepare": "husky",
     "install:all": "pnpm install && pnpm --dir frontend install && pnpm --dir backend install",
     "format": "pnpm --dir frontend format && pnpm --dir backend format",

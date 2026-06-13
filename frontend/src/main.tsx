@@ -1,4 +1,5 @@
 import { StrictMode, useEffect } from "react";
+import "@blakedykes/ui/style.css";
 import "@/styles/global.scss";
 import ReactDOM from "react-dom/client";
 import { routeTree } from "./routeTree.gen";
@@ -6,6 +7,9 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 import type { AuthContext } from "./features/auth/auth.types";
 import { useAuth } from "./features/auth/providers/auth/context";
 import { ApiProvider } from "./api/ApiProvider";
+
+import "@blakedykes/ui/style.css";
+import "@/styles/global.scss";
 
 const router = createRouter({
   routeTree,

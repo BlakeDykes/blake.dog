@@ -1,6 +1,6 @@
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
-import { Link } from "@/ui/shared/link";
-import { Text } from "@/ui/shared/text";
+import { Link as RouterLink } from "@tanstack/react-router";
+import { Link, Text } from "@blakedykes/ui";
 import styles from "./index.module.scss";
 
 export const Navigation = () => {
@@ -8,13 +8,13 @@ export const Navigation = () => {
     <NavigationMenu.Root className={styles.root}>
       <NavigationMenu.List className={styles.list}>
         <NavigationMenu.Item className={styles.item}>
-          <Link to="/">
-            <Text text="Home" />
+          <Link render={<RouterLink to="/" />}>
+            <Text>Home</Text>
           </Link>
         </NavigationMenu.Item>
         <NavigationMenu.Item className={styles.item}>
-          <Link to="/about">
-            <Text text="About" />
+          <Link render={<RouterLink to="/about" />}>
+            <Text>About</Text>
           </Link>
         </NavigationMenu.Item>
       </NavigationMenu.List>

@@ -13,6 +13,9 @@ importers:
       "@base-ui/react":
         specifier: ^1.4.1
         version: 1.4.1(@types/react@19.2.9)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      "@blakedykes/ui":
+        specifier: 0.3.0
+        version: 0.3.0(@base-ui/react@1.4.1(@types/react@19.2.9)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       "@tanstack/react-query":
         specifier: ^5.100.11
         version: 5.100.11(react@19.2.3)
@@ -285,6 +288,17 @@ packages:
     peerDependenciesMeta:
       "@types/react":
         optional: true
+
+  "@blakedykes/ui@0.3.0":
+    resolution:
+      {
+        integrity: sha512-AizyyqpZ2W7bMzyxhEBvmDGTWBZM95pykVBGgZ0Jg4TxTRe5eWfd9JHEwUlDuB5OdoKxRSGF7WBaQONByNL77g==,
+        tarball: https://npm.pkg.github.com/download/@blakedykes/ui/0.3.0/9d8d1445a62cfcb3798a88e0f1c556b0b483c4d8,
+      }
+    peerDependencies:
+      "@base-ui/react": ^1.4.1
+      react: ^19.0.0
+      react-dom: ^19.0.0
 
   "@bufbuild/protobuf@2.12.0":
     resolution:
@@ -2644,6 +2658,12 @@ snapshots:
       use-sync-external-store: 1.6.0(react@19.2.3)
     optionalDependencies:
       "@types/react": 19.2.9
+
+  "@blakedykes/ui@0.3.0(@base-ui/react@1.4.1(@types/react@19.2.9)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)":
+    dependencies:
+      "@base-ui/react": 1.4.1(@types/react@19.2.9)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
 
   "@bufbuild/protobuf@2.12.0": {}
 

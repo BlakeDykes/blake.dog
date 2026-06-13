@@ -10,10 +10,13 @@
     "wasm:build": "cmd /c \"call \"F:\\Program Files\\emsdk\\emsdk_env.bat\" && emcc -v && node scripts\\build-wasm.mjs\"",
     "format": "pnpm format:prettier && pnpm format:cpp",
     "format:prettier": "prettier --write .",
-    "format:cpp": "node scripts/format-cpp.mjs"
+    "format:cpp": "node scripts/format-cpp.mjs",
+    "ds:link": "pnpm add link:../../blake_dog_ds",
+    "ds:unlink": "pnpm add @blakedykes/ui"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
+    "@blakedykes/ui": "0.3.0",
     "@tanstack/react-query": "^5.100.11",
     "@tanstack/react-query-devtools": "^5.100.11",
     "@tanstack/react-router": "^1.169.2",

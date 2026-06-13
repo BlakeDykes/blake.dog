@@ -1,7 +1,7 @@
 import type { AuthContext } from "@/features/auth/auth.types";
 import { AdminDrawer } from "../drawer";
 import { Drawer } from "@base-ui/react";
-import { Flex } from "@/ui/shared/container/flex";
+import { Button, Stack, Text } from "@blakedykes/ui";
 
 export const AdminLayout = ({ principal, logout }: AuthContext) => {
   const drawerHandle = Drawer.createHandle();
@@ -9,10 +9,12 @@ export const AdminLayout = ({ principal, logout }: AuthContext) => {
     <>
       <Drawer.Trigger handle={drawerHandle}>Admin</Drawer.Trigger>
       <AdminDrawer handle={drawerHandle} />
-      <Flex>
-        <span>{principal?.username}</span>
-        <button onClick={logout}>Logout</button>
-      </Flex>
+      <Stack direction="row" align="center">
+        <Text>{principal?.username}</Text>
+        <Button variant="ghost" onClick={logout}>
+          Logout
+        </Button>
+      </Stack>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Header } from "@/ui/shared/header";
+import { Heading } from "@blakedykes/ui";
 
 export const Route = createFileRoute("/about")({
   component: AboutComponent,
@@ -8,7 +8,7 @@ export const Route = createFileRoute("/about")({
 function AboutComponent() {
   return (
     <div>
-      <Header Component="h1">About</Header>
+      <Heading level={1}>About</Heading>
     </div>
   );
 }

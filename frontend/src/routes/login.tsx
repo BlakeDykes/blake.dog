@@ -1,6 +1,6 @@
 import { type LoginInput } from "@/features/auth/auth.types";
 import { useAuth } from "@/features/auth/providers/auth/context";
-import { Button, Field, Form } from "@base-ui/react";
+import { Button, Field, Form } from "@blakedykes/ui";
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import {
   useForm,
@@ -51,6 +51,7 @@ function LoginComponent() {
   return (
     <Form
       onSubmit={handleSubmit(onSubmit, onError)}
+      style={{ maxWidth: "50vw", minWidth: "350px" }}
       // errors={errors}
     >
       <Field.Root name="username">
